@@ -37,6 +37,12 @@ export default NextAuth({
       console.log('token: ', token);
       return token;
     },
+    async session({ session, token }) {
+      console.log('session: ', session);
+
+      return session;
+    },
+
     redirect: async ({ url, baseUrl }): Promise<string> => {
       if (url === '/profile') {
         return Promise.resolve('/');
