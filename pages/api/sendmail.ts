@@ -22,7 +22,7 @@ const handleMailingRequest = async (req: NextApiRequest, res: NextApiResponse) =
   const mailContent = generateWriteUp(writeup, { name: token?.name, phone });
   const mailAttachments = {
     filename: "Techspardha'23 Prospectus .pdf",
-    content: process.env.PROSPECTUS_LINK,
+    path: 'public/Prospectus .pdf',
     contentType: 'application/pdf',
   }
   const gmail = getGmailService({
