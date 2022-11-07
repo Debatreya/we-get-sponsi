@@ -18,7 +18,6 @@ const handleMailingRequest = async (req: NextApiRequest, res: NextApiResponse) =
   console.log('token: ', token);
   const { writeup, phone, name, emails, cc } = req.body;
 
-  res.json('hello from sendmail');
   const mailContent = generateWriteUp(writeup, { name: token?.name, phone });
   const mailAttachments = {
     filename: "Techspardha'23 Prospectus .pdf",
