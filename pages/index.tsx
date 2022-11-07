@@ -96,7 +96,13 @@ export default function Home() {
                       emails: emails.split(","),
                       cc: cc.split(","),
                     },
-                  }).then((res) => res.data);
+                  }).then((res) => {
+                    if (res.data.error) {
+                      alert(res.data.error);
+                    } else {
+                      alert(res.data);
+                    }
+                  });
                 }}
               >
                 Send Request

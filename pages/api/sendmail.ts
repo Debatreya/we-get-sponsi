@@ -38,8 +38,7 @@ const handleMailingRequest = async (req: NextApiRequest, res: NextApiResponse) =
         cc: cc.join(', '),
         replyTo: token?.email,
         subject: "Regarding Sponsorship for Techspardha'23 @NITKurukshetra",
-        text: mailContent,
-        // html: `<p>${mailContent}</p>`,
+        html: mailContent,
         attachments: mailAttachments,
         textEncoding: "base64",
         headers: [
