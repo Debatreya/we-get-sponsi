@@ -15,15 +15,14 @@ const sendMail = async (gmail: any, message: string) => {
 const handleMailingRequest = async (req: NextApiRequest, res: NextApiResponse) => {
   const secret = process.env.SECRET;
   const token = await getToken({ req, secret });
-  console.log('token: ', token);
-  const { writeup, phone, name, emails, cc } = req.body;
+  const { writeup, phone, emails, cc } = req.body;
 
   const mailContent = generateWriteUp(writeup, { name: token?.name, phone });
-  const mailAttachments = {
+  const mailAttachments = [{
     filename: "Techspardha'23 Prospectus .pdf",
-    path: process.env.PROSPECTUS_LINK,
+    href: process.env.PROSPECTUS_LINK,
     contentType: 'application/pdf',
-  }
+  }];
   const gmail = getGmailService({
     type: "authorized_user",
     client_id: process.env.GOOGLE_ID,

@@ -22,10 +22,10 @@ export default NextAuth({
   secret: process.env.SECRET,
   callbacks: {
     async signIn({ account, profile }) {
-      console.log('account: ', account);
-      console.log('profile: ', profile);
+      // console.log('account: ', account);
+      // console.log('profile: ', profile);
       if (account?.provider === "google" && profile?.email?.endsWith("@nitkkr.ac.in")) {
-        console.log('scopes:', account?.scope);
+        // console.log('scopes:', account?.scope);
         return true;
       }
       return true;
@@ -34,11 +34,11 @@ export default NextAuth({
       if (account?.refresh_token) {
         token.refresh_token = account.refresh_token;
       }
-      console.log('token: ', token);
+      // console.log('token: ', token);
       return token;
     },
     async session({ session, token }) {
-      console.log('session: ', session);
+      // console.log('session: ', session);
 
       return session;
     },

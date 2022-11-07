@@ -14,7 +14,7 @@ export default function Home() {
   const [writeup, setWriteup] = useState<string>("general");
   useEffect(() => {}, [session]);
 
-  console.log("data: ", session);
+  // console.log("data: ", session);
   return (
     <div className={styles.container}>
       <Head>
