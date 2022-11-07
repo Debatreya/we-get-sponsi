@@ -3,9 +3,14 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useSession } from "next-auth/react";
 import Axios from "axios";
+import { FaGithub } from "react-icons/fa";
+import { useState } from "react";
 
 export default function Home() {
   const { data: session } = useSession();
+  const [mob, setMob] = useState<number>(0);
+  const [writeup, setWriteup] = useState<string>("general");
+
   console.log("data: ", session);
   return (
     <div className={styles.container}>
@@ -19,11 +24,27 @@ export default function Home() {
           Welcome to <a href=""> TS-Mailer! </a>
         </h1>
 
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
         <div className={styles.grid}>
+          <div>
+            <label htmlFor="phone">Mobile: </label>
+            <input id="phone" />
+          </div>
+          <div>
+            <label htmlFor="writeup">Writeup: </label>
+            <select id="writeup">
+              <option value="general">General</option>
+              <option value="hackathon"> Hackathon </option>
+              <option value="coding-platform"> Coding Platform </option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="emails">Emails: </label>
+            <input type="text" id="emails" />
+          </div>
+          <div>
+            <label htmlFor="cc">CC: </label>
+            <input type="text" id="cc" />
+          </div>
           <button
             onClick={() => {
               Axios({
@@ -33,27 +54,40 @@ export default function Home() {
                 data: {
                   name: "Yash Mittal",
                   phone: "1234567890",
-                  writeup: "general",
+                  writeup: "hackathon",
+                  emails: ["techsavvyash@gmail.com", "yami8b@gmail.com"],
+                  cc: [
+                    "yaadonkabackup@gmail.com",
+                    "yash_12012002@nitkkr.ac.in",
+                  ],
                 },
               }).then((res) => res.data);
             }}
           >
-            {" "}
-            Send Request{" "}
+            Send Request
           </button>
         </div>
       </main>
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
+        <p>
+          <a
+            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Made by
+            <span className={styles.logo}>
+              <a
+                href="https://github.com/techsavvyash"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {" "}
+                <FaGithub /> /techsavvyash
+              </a>
+            </span>
+          </a>
+        </p>
       </footer>
     </div>
   );
