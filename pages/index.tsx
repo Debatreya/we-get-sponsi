@@ -8,7 +8,9 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const { data: session } = useSession();
-  const [mob, setMob] = useState<number>(0);
+  const [mob, setMob] = useState<string>("");
+  const [emails, setEmails] = useState<string>("");
+  const [cc, setCC] = useState<string>("");
   const [writeup, setWriteup] = useState<string>("general");
   useEffect(() => {}, [session]);
 
@@ -28,48 +30,78 @@ export default function Home() {
           <button onClick={() => signIn("google")}>Sign In With Google</button>
         ) : (
           <>
-            <div className={styles.grid}>
-              <div>
+            <div>
+              <div className={styles.card}>
                 <label htmlFor="phone">Mobile: </label>
-                <input id="phone" />
+                <input
+                  className={styles.inpBox}
+                  id="phone"
+                  onChange={(e) => {
+                    setMob(e.target.value);
+                  }}
+                />
               </div>
-              <div>
+              <br />
+              <div className={styles.card}>
                 <label htmlFor="writeup">Writeup: </label>
-                <select id="writeup">
-                  <option value="general">General</option>
-                  <option value="hackathon"> Hackathon </option>
-                  <option value="coding-platform"> Coding Platform </option>
+                <select
+                  className={styles.inpBox}
+                  id="writeup"
+                  onChange={(e) => setWriteup(e.target.value)}
+                >
+                  <option className={styles.inpBox} value="general">
+                    General
+                  </option>
+                  <option className={styles.inpBox} value="hackathon">
+                    {" "}
+                    Hackathon{" "}
+                  </option>
+                  <option className={styles.inpBox} value="coding-platform">
+                    {" "}
+                    Coding Platform{" "}
+                  </option>
                 </select>
               </div>
-              <div>
+              <br />
+              <div className={styles.card}>
                 <label htmlFor="emails">Emails: </label>
-                <input type="text" id="emails" />
+                <input
+                  className={styles.inpBox}
+                  type="text"
+                  id="emails"
+                  onChange={(e) => setEmails(e.target.value)}
+                />
               </div>
-              <div>
+              <br />
+              <div className={styles.card}>
                 <label htmlFor="cc">CC: </label>
-                <input type="text" id="cc" />
+                <input
+                  className={styles.inpBox}
+                  type="text"
+                  id="cc"
+                  onChange={(e) => setCC(e.target.value)}
+                />
               </div>
+              <br />
               <button
+                className={styles.card}
                 onClick={() => {
                   Axios({
                     method: "post",
                     url: "/api/sendmail",
                     withCredentials: true,
                     data: {
-                      name: "Yash Mittal",
-                      phone: "1234567890",
-                      writeup: "hackathon",
-                      emails: ["techsavvyash@gmail.com", "yami8b@gmail.com"],
-                      cc: [
-                        "yaadonkabackup@gmail.com",
-                        "yash_12012002@nitkkr.ac.in",
-                      ],
+                      phone: mob,
+                      writeup: writeup,
+                      emails: emails.split(","),
+                      cc: cc.split(","),
                     },
                   }).then((res) => res.data);
                 }}
               >
                 Send Request
               </button>
+              <br />
             </div>
           </>
         )}
