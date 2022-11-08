@@ -34,6 +34,7 @@ const handleMailingRequest = async (req: NextApiRequest, res: NextApiResponse) =
     await Promise.all(emails.map(async (email: string) => {
       const options = {
         to: email,
+        from: `"${token?.name}" <${token?.email}>`,
         cc: cc.join(', '),
         replyTo: token?.email,
         subject: "Regarding Sponsorship for Techspardha'23 @NITKurukshetra",
