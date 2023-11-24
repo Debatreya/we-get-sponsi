@@ -19,7 +19,7 @@ const handleMailingRequest = async (req: NextApiRequest, res: NextApiResponse) =
 
   const mailContent = generateWriteUp(writeup, { name: token?.name, phone });
   const mailAttachments = [{
-    filename: "Techspardha'23 Prospectus .pdf",
+    filename: "Techspardha'24 Prospectus .pdf",
     href: process.env.PROSPECTUS_LINK,
     contentType: 'application/pdf',
   }];
